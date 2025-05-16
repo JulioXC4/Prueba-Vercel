@@ -43,6 +43,7 @@
 </template>
 
 <script>
+const API_URL = import.meta.env.VITE_API_URL;
 import axios from 'axios'
 import { RouterLink } from 'vue-router'
 import LanguageSwitcher from './language-switcher.component.vue'
@@ -61,7 +62,7 @@ export default {
     }
   },
   created() {
-    axios.get('http://localhost:3000/users/1').then(({ data }) => {
+    axios.get(`${import.meta.env.VITE_API_URL}/users/1`).then(({ data }) => {
       this.user = data;
       const role = data.role_id?.name;
 
