@@ -1,0 +1,20 @@
+{
+  "sidebar": {
+    "summary": "Resumen",
+    "subscription": "Suscripción",
+    "inventory": "Inventario",
+    "suppliers": "Proveedores",
+    "alerts": "Alertas",
+    "orders": "Pedidos",
+    "recipes": "Recetas",
+    "sales": "Ventas",
+    "ratings": "Calificaciones"
+  },
+  "language": {
+    "switch": "Cambiar idioma"
+  },
+  "footer": {
+    "rights-reserved": "todos los derechos reservados.",
+    "developed-by": "Desarrollado por"
+  }
+}

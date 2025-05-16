@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Don Pepe",
+      "email": "pepe@gmail.com",
+      "avatar": {
+        "url": "https://i.pravatar.cc/150?img=1"
+      },
+      "role_id": {
+        "name": "supplier"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Chef Rosa",
+      "email": "rosa@gmail.com",
+      "avatar": {
+        "url": "https://i.pravatar.cc/150?img=2"
+      },
+      "role_id": {
+        "name": "restaurant"
+      }
+    }
+  ]
+}

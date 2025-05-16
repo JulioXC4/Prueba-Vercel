@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+:root {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme:normal;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #ffffff;
+
+  color: black !important;
+  background-color: #ffffff !important;
+  color-scheme: light !important;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --p-dialog-background: #ffffff !important;
+  --p-dialog-color: black !important;
+  .p-datatable-header-cell{
+    background-color: #ffffff !important;
+    color: black !important;
+    background: white !important;
+  }
+  --p-content-background: #ffffff !important;
+    --p-content-color: black !important;
+  .p-inputtext{
+    background-color: #ffffff !important;
+    color: black !important;
+  }
+  .p-datepicker-dropdown {
+    background-color: #ffffff !important;
+  }
+  .p-select {
+    background-color: #ffffff !important;
+    color: black !important;
+  }
+  .p-select-option {
+    background-color: #ffffff !important;
+    color: black !important;
+  }
+  .p-select-label {
+    color: black !important;
+  }
+  .p-select-overlay {
+    background-color: #ffffff !important;
+  }
+}
+
+a {
+  font-weight: 500;
+  color: #6b6a6a;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #4b4b4b;
+}
+
+body {
+
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.card {
+  padding: 2em;
+}
+
+
+
+#app {
+}
+
+.green-button {
+  border-radius: 9999px !important;
+  background-color: #4F8A5B !important;
+  color: white !important;
+  border: none !important;
+}
+
+.green-button:hover {
+  background-color: #3d6e47 !important;
+  color: white !important;
+}
+
+.red-button {
+  border-radius: 9999px !important;
+  background-color: #D9534F !important;
+  color: white !important;
+  border: none !important;
+}
+
+.red-button:hover {
+  background-color: #D9534F !important;
+  color: white !important;
+}
