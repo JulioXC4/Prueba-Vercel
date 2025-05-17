@@ -43,11 +43,11 @@
 </template>
 
 <script>
-const API_URL = import.meta.env.VITE_API_URL;
 import axios from 'axios'
 import { RouterLink } from 'vue-router'
 import LanguageSwitcher from './language-switcher.component.vue'
 import logo from '../../assets/logo-restock.png'
+import { mockUser } from '../../shared/mocks/user.mock';
 
 export default {
   name: 'Sidebar',
@@ -58,13 +58,13 @@ export default {
       user: null,
       sidebarVisible: false,
       isMobile: window.innerWidth < 1260,
-      menuItems: [] // se llenará según el rol
+      menuItems: [], // se llenará según el rol
     }
   },
   created() {
-    axios.get(`${import.meta.env.VITE_API_URL}/users/1`).then(({ data }) => {
-      this.user = data;
-      const role = data.role_id?.name;
+      this.user = mockUser;
+
+      const role = this.user.role_id?.name;
 
       if (role === 'supplier') {
         this.menuItems = [
@@ -85,7 +85,7 @@ export default {
           { label: 'sidebar.sales', icon: 'pi pi-chart-line', route: '/dashboard/restaurant/sales' }
         ];
       }
-    });
+  
   },
   mounted() {
     window.addEventListener('resize', this.checkMobile)
@@ -116,7 +116,7 @@ export default {
 
 /* Base sidebar para todos los tamaños */
 .sidebar {
-  width: 18rem;
+  /* width: 30rem; */
   background: var(--surface-0);
   border-right: 1px solid var(--surface-border);
   transition: transform 0.3s ease;

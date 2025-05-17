@@ -37,90 +37,157 @@
       currentIndex: 0,
       visibleCount: 5
     };
+  }, computed: {
+    visibleIngredients() {
+      return this.ingredients.slice(this.currentIndex, this.currentIndex + this.visibleCount)
+    }
   }, mounted() {
-    this.updateVisibleCount();
-    window.addEventListener('resize', this.updateVisibleCount);
+    this.updateVisibleCount()
+    window.addEventListener('resize', this.updateVisibleCount)
   }, beforeUnmount() {
-    window.removeEventListener('resize', this.updateVisibleCount);
+    window.removeEventListener('resize', this.updateVisibleCount)
   }, methods: {
     updateVisibleCount() {
-      const width = window.innerWidth;
-      if (width < 640) this.visibleCount = 2; else if (width < 900) this.visibleCount = 3; else if (width < 1200) this.visibleCount = 4; else this.visibleCount = 5;
+      const width = window.innerWidth
+      if (width < 640) this.visibleCount = 2
+      else if (width < 900) this.visibleCount = 3
+      else if (width < 1200) this.visibleCount = 4
+      else this.visibleCount = 5
     }, next() {
       if (this.currentIndex + this.visibleCount < this.ingredients.length) {
-        this.currentIndex++;
+        this.currentIndex++
       }
     }, prev() {
       if (this.currentIndex > 0) {
-        this.currentIndex--;
+        this.currentIndex--
       }
-    }, getVisibleItems() {
-      return this.ingredients.slice(this.currentIndex, this.currentIndex + this.visibleCount);
+    }, getPairs() {
+      const pairs = []
+      for (let i = 0; i < this.ingredients.length; i += 2) {
+        pairs.push(this.ingredients.slice(i, i + 2))
+      }
+      return pairs
     }
   }
 } </script>
 <template>
-  <div><h3 class="widget-title">Latest Supplies</h3>
-    <div class="carousel-widget">
-      <div class="carousel-wrapper">
-        <button @click="prev" class="nav-button" :disabled="currentIndex === 0">‹</button>
-        <div class="carousel-track">
-          <div
-              v-for="(ingredient, index) in getVisibleItems()"
-              :key="index"
-              class="ingredient-card"
-          >
-            <h4 class="text-sm font-semibold text-gray-800 mb-1">{{ ingredient.name }}</h4>
-            <p class="text-xs font-medium text-green-700 mb-1">{{ ingredient.category }}</p>
-            <p class="text-xs text-gray-600 leading-snug">{{ ingredient.description }}</p>
-          </div>
+  <div class="carousel-container"><h3 class="widget-title">Last added supplies</h3>
+    <!-- Desktop Carousel -->
+    <div class="carousel">
+      <pv-button icon="pi pi-chevron-left" text @click="prev" :disabled="currentIndex === 0"/>
+      <div class="carousel-track">
+        <div class="ingredient-card" v-for="(i, index) in visibleIngredients" :key="index">
+          <h4>{{ i.name }}</h4>
+          <p class="category">{{ i.category }}</p>
+          <p class="description">{{ i.description }}</p>
         </div>
+      </div>
+      <pv-button icon="pi pi-chevron-right" text @click="next"
+                 :disabled="currentIndex + visibleCount >= ingredients.length"/>
+    </div>
 
-        <button @click="next" class="nav-button" :disabled="currentIndex + visibleCount >= ingredients.length">›
-        </button>
+    <!-- Mobile Scrollable Grid -->
+    <div class="supplies-grid">
+      <div class="ingredient-pair" v-for="(pair, i) in getPairs()" :key="i">
+        <div class="ingredient-card" v-for="(i, j) in pair" :key="j">
+          <h4>{{ i.name }}</h4>
+          <p class="category">{{ i.category }}</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
-<style scoped> .widget-title {
+<style scoped>
+.widget-title {
   font-family: Poppins, sans-serif;
   font-weight: 400;
   font-size: 23px;
   margin-bottom: 10px;
 }
 
-.carousel-widget {
-  background: #fff;
-  padding: 20px 30px;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 30px;
+.carousel-container {
+  margin-top: 2rem;
 }
 
-.carousel-wrapper {
+.carousel {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-}
-
-.nav-button {
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 0 10px;
+  overflow: hidden;
 }
 
 .carousel-track {
   display: flex;
   gap: 1rem;
+  flex-wrap: nowrap;
   overflow: hidden;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .ingredient-card {
-  flex: 0 0 200px;
+  flex: 0 0 calc(20% - 1rem);
   background-color: #CDE7D3;
+  border-radius: 12px;
   padding: 1rem;
-  border-radius: 8px;
+  box-sizing: border-box;
+  min-width: 150px;
+  height: 180px;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  align-content: space-around;
+}
+
+.ingredient-card h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.category {
+  font-weight: 500;
+  margin: 0.25rem 0;
+  color: #757575;
+}
+
+.description {
+  font-size: 13px;
+  color: #444;
+}
+
+.supplies-grid {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .supplies-grid {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    background: #fff;
+    padding: 20px 30px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    height: 180px;
+  }
+
+  .ingredient-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ingredient-card {
+    background-color: #F4F4F4;
+    border-radius: 15px;
+    width: 215px;
+    padding: 0 0 0 15px;
+    min-height: 60px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    align-content: center;
+  }
+
+  .carousel {
+    display: none;
+  }
 } </style>

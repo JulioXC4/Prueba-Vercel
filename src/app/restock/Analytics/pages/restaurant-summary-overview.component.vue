@@ -27,7 +27,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .summary-row-1 {

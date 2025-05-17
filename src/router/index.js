@@ -9,6 +9,10 @@ const Inventory = () => import('../restaurant-admin/components/inventory.compone
 const RestaurantSummaryOverview = () => import('../app/restock/Analytics/pages/restaurant-summary-overview.component.vue')
 const SupplierReviewComponent = () => import('../app/restock/resource/orders-to-suppliers/pages/supplier-review.component.vue')
 const RoleRedirect = () => import('../app/public/pages/role-redirect.component.vue');
+const SupplierSummaryOverview = () => import('../app/restock/Analytics/pages/supplier-summary-overview.component.vue')
+const RestaurantSupplierOverview = () => import('../app/restock/resource/supplier-catalog/pages/restaurant-supplier-overview.component.vue')
+const RestaurantSupplierDetail = () => import('../app/restock/resource/supplier-catalog/pages/supplier-detail.component.vue')
+
 /**
  * @type {import('vue-router').RouteRecordRaw[]}
  * @description Application route definitions.
@@ -33,7 +37,25 @@ const routes = [
         meta: { title: 'sidebar.restaurant-summary-overview' }
     },
     {
-        path: '/dashboard/supplier/reviews',
+        path: '/dashboard/supplier/summary',
+        name: 'supplier-summary',
+        component: SupplierSummaryOverview,
+        meta: { title: 'sidebar.supplier-summary-overview' }
+    },
+    {
+        path: '/dashboard/restaurant/suppliers',
+        name: 'supplier-catalog',
+        component: RestaurantSupplierOverview,
+        meta: { title: 'sidebar.supplier-catalog-overview' }
+    },
+    {
+        path: '/dashboard/restaurant/suppliers/:id',
+        name: 'supplier-detail',
+        component: RestaurantSupplierDetail,
+        meta: { title: 'sidebar.supplier-detail' }
+    },
+    {
+        path: '/dashboard/supplier/ratings',
         name: 'supplier-reviews',
         component: SupplierReviewComponent,
         meta: { title: 'sidebar.ratings' }
